@@ -16,8 +16,8 @@ Laravel APIとReactを使用して作成した投稿アプリです。
 
 ```text
 react-laravel-project/
-├── laravel-api/   # Laravel API
-└── react-app/     # Reactフロントエンド
+├── laravel-api/    # Laravel API
+└── react-app/      # Reactフロントエンド
 ```
 
 ## 主な機能
@@ -32,13 +32,12 @@ react-laravel-project/
 
 ## API一覧
 
-| HTTPメソッド | エンドポイント | 処理 |
-|---|---|---|
-| GET | /api/posts | 投稿一覧・検索 |
-| POST | /api/posts | 投稿登録 |
-| GET | /api/posts/{id} | 投稿詳細 |
-| PUT/PATCH | /api/posts/{id} | 投稿更新 |
-| DELETE | /api/posts/{id} | 投稿削除 |
+| HTTPメソッド | エンドポイント  | 処理           |
+| ------------ | --------------- | -------------- |
+| GET          | /api/posts      | 投稿一覧・検索 |
+| POST         | /api/posts      | 投稿登録       |
+| PUT/PATCH    | /api/posts/{id} | 投稿更新       |
+| DELETE       | /api/posts/{id} | 投稿削除       |
 
 ### タイトル検索
 
@@ -59,7 +58,9 @@ cd laravel-api
 composer install
 ```
 
-`.env.example` を `.env` にコピーし、MariaDBの接続情報を設定します。
+`.env.example` を `.env` にコピーし、MariaDBのデータベース名・ユーザー名・パスワード・ポートなどの接続情報を設定します。
+
+データベースを作成した後、以下を実行します。
 
 ```bash
 php artisan key:generate

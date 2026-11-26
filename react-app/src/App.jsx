@@ -9,11 +9,35 @@ function App() {
   const [editPostsIndex, setEditPostsIndex] = useState(null);
   const [search, setSearch] = useState("");
 
+
   useEffect(() => {
     fetch("http://127.0.0.1:8000/api/posts")
       .then((res) => res.json())
-      .then((data) => setPosts(data));
+      .then((data) => {
+        setPosts(data);
+      });
   }, []);
+
+  function handleSearch(e) {
+    e.preventDefault();
+
+    fetch(
+      `http://127.0.0.1:8000/api/posts?keyword=${encodeURIComponent(search)}`,
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        setPosts(data);
+      });
+  }
+
+  function handleReset() {
+    setSearch("");
+    fetch("http://127.0.0.1:8000/api/posts")
+      .then((res) => res.json())
+      .then((data) => {
+        setPosts(data);
+      });
+  }
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -71,16 +95,6 @@ function App() {
           setMessage("投稿を更新しました!");
         });
     }
-  }
-
-  function handleSearch(e) {
-    e.preventDefault();
-
-    fetch(`http://127.0.0.1:8000/api/posts?keyword=${encodeURIComponent(search)}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setPosts(data);
-      });
   }
 
   function deleteButton(postId) {
@@ -154,6 +168,10 @@ function App() {
           onChange={(e) => setSearch(e.target.value)}
         />
         <button type="submit">検索</button>
+
+        <button type="button" onClick={handleReset}>
+          検索解除
+        </button>
       </form>
 
       <div className="post-list">

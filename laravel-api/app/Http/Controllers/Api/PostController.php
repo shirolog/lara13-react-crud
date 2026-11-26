@@ -15,11 +15,15 @@ class PostController extends Controller
     {
         $keyword = request('keyword');
 
+        $query = Post::query();
+
         if ($keyword) {
-            return Post::where('title', 'like', '%' .$keyword. '%')->get();
+            $query->where('title', 'like', '%' . $keyword . '%');
         }
 
-        return Post::all();
+        $posts = $query->latest()->get();
+
+        return $posts;
     }
 
     /**
